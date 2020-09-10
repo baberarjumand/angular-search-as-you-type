@@ -1,1 +1,28 @@
 /* You can add global styles to this file, and also import other style files */
+
+@font-face {
+  font-family: "inter-bold";
+  src: url(assets/fonts/Inter-Bold-slnt=0.ttf);
+}
+
+@font-face {
+  font-family: "inter-light";
+  src: url(assets/fonts/Inter-Light-slnt=0.ttf);
+}
+
+@font-face {
+  font-family: "inter-regular";
+  src: url(assets/fonts/Inter-Regular-slnt=0.ttf);
+}
+
+* {
+  font-family: "inter-regular", sans-serif;
+}
+
+:root {
+  --gray: #bfbfbf;
+  --light-gray: #ededed;
+  --dark-gray: #191919;
+  --light-purple: #3c3cd6;
+  --dark-purple: #263667;
+}
