@@ -11,19 +11,31 @@
   <div class="col-12 col-sm-8 offset-sm-2">
     <div class="row">
       <div
-        class="col-10 offset-1 col-sm-6 offset-sm-0"
+        class="col-10 offset-1 col-sm-4 offset-sm-0"
         *ngFor="let company of this.searchResults"
       >
-        <div class="card my-3">
-          <img class="card-img-top" src="{{ company.imageUrl }}" alt="" />
-          <div class="card-body">
-            <h5>{{ company.name }}</h5>
-            <p>{{ company.phrase }}</p>
+        <a [routerLink]="['/company', company.id]">
+          <div class="card my-3">
+            <div class="inner">
+              <img class="card-img-top" src="{{ company.imageUrl }}" alt="" />
+            </div>
+            <div class="card-body">
+              <h5>{{ company.name }}</h5>
+              <p>{{ company.phrase }}</p>
+            </div>
+            <div class="card-footer">
+              <p>{{ company.city }}, {{ company.country }}</p>
+            </div>
           </div>
-          <div class="card-footer">
-            <p>{{ company.city }}, {{ company.country }}</p>
-          </div>
-        </div>
+        </a>
+      </div>
+      <div class="col-12 text-center">
+        <a
+          class="btn btn-primary my-3"
+          (click)="this.loadTenMoreResults()"
+          *ngIf="!this.allResultsFetched"
+          >View More</a
+        >
       </div>
     </div>
   </div>

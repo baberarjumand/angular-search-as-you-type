@@ -10,7 +10,7 @@ const routes: Routes = [
       ),
   },
   {
-    path: 'company-detail',
+    path: 'company/:id',
     loadChildren: () =>
       import('./pages/company-detail/company-detail.module').then(
         (m) => m.CompanyDetailModule
@@ -24,7 +24,10 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [
+    // RouterModule.forRoot(routes),
+    RouterModule.forRoot(routes, { scrollPositionRestoration: 'disabled' }),
+  ],
   exports: [RouterModule],
 })
 export class AppRoutingModule {}

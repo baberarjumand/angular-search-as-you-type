@@ -1,1 +1,15 @@
-<p>company-detail works!</p>
+<div class="row">
+  <div class="col-12 col-sm-6 offset-sm-3 p-0" *ngIf="this.company">
+    <img class="w-100" src="{{ this.company.imageUrl }}" alt="" />
+    <div class="mx-3 px-3">
+      <h1>{{ this.company.name }}</h1>
+      <h5>{{ this.company.phrase }}</h5>
+      <p>
+        <i>{{ this.company.city }}, {{ this.company.country }}</i>
+      </p>
+      <div class="text-center">
+        <a routerLink="/companies" class="btn btn-primary">Back</a>
+      </div>
+    </div>
+  </div>
+</div>

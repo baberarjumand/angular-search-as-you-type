@@ -14,23 +14,41 @@ export class CompaniesComponent implements OnInit, OnDestroy {
   searchForm: FormGroup;
   searchResults: Company[];
   searchResultsSub: Subscription;
+  currentPage = 1;
+  allResultsFetched = false;
 
   // searchResultSet = new BehaviorSubject<Company[]>(null);
 
   constructor(private companyService: CompanyService) {}
 
   ngOnInit(): void {
-    this.searchResultsSub = this.companyService
-      .getTenCompanies()
-      .subscribe((companies) => {
-        this.searchResults = companies;
-        // console.log(this.searchResults);
-      });
+    // this.searchResultsSub = this.companyService
+    //   .getFirstTenCompanies()
+    //   .subscribe((companies) => {
+    //     this.searchResults = companies;
+    //     // console.log(this.searchResults);
+    //   });
+    this.searchResultsSub = this.companyService.currentResultSet.subscribe(
+      (resultArr) => {
+        this.searchResults = resultArr;
+      }
+    );
+    // this.companyService.getFirstTenCompanies();
   }
 
   ngOnDestroy(): void {
     if (this.searchResultsSub) {
       this.searchResultsSub.unsubscribe();
+    }
+  }
+
+  loadTenMoreResults(): void {
+    if (this.currentPage < 5) {
+      this.currentPage++;
+      if (this.currentPage >= 5) {
+        this.allResultsFetched = true;
+      }
+      this.companyService.getCompaniesByPageNumber(this.currentPage);
     }
   }
 
