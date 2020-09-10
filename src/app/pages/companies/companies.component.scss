@@ -1,0 +1,22 @@
+.search-header {
+  height: 40vh;
+  background-color: var(--dark-purple);
+  border-bottom-right-radius: 20px;
+  border-bottom-left-radius: 20px;
+}
+
+.search-heading {
+  color: white;
+  font-family: "inter-light";
+}
+
+.search-bar {
+  border-color: transparent;
+  border-radius: 20px;
+  padding: 15px;
+  background-color: var(--light-gray);
+}
+
+.search-bar:focus {
+  outline-width: 0;
+}
