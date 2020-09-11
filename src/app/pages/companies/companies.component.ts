@@ -53,12 +53,14 @@ export class CompaniesComponent implements OnInit, OnDestroy {
     this.searchBarInputSub = this.searchBar.valueChanges
       .pipe(debounceTime(750), distinctUntilChanged())
       .subscribe((searchTerm) => {
-        console.log(searchTerm);
+        // console.log(searchTerm);
         if (searchTerm.length >= 3) {
           this.companyService.searchCompaniesByTerm(searchTerm);
+          this.allResultsFetched = true;
         } else if (!searchTerm || searchTerm.length === 0) {
           this.currentPage = 1;
           this.companyService.getFirstTenCompanies();
+          this.allResultsFetched = false;
         }
       });
   }
