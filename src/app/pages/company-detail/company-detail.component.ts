@@ -33,5 +33,10 @@ export class CompanyDetailComponent implements OnInit, OnDestroy {
     if (this.companySub) {
       this.companySub.unsubscribe();
     }
+    this.resetSearchResultSetOnHomepage();
+  }
+
+  resetSearchResultSetOnHomepage(): void {
+    this.companyService.getFirstTenCompanies();
   }
 }
