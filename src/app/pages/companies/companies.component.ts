@@ -1,8 +1,20 @@
 import { CompanyService } from './../../shared/services/company.service';
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import {
+  Component,
+  OnInit,
+  OnDestroy,
+  ViewChild,
+  ElementRef,
+} from '@angular/core';
+import {
+  FormGroup,
+  FormBuilder,
+  Validators,
+  FormControl,
+} from '@angular/forms';
 import { Company } from 'src/app/shared/model/company';
 import { Subscription, BehaviorSubject } from 'rxjs';
+import { debounceTime, distinctUntilChanged, switchMap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-companies',
@@ -16,6 +28,8 @@ export class CompaniesComponent implements OnInit, OnDestroy {
   searchResultsSub: Subscription;
   currentPage = 1;
   allResultsFetched = false;
+  searchBar: FormControl = new FormControl();
+  searchBarInputSub: Subscription;
 
   // searchResultSet = new BehaviorSubject<Company[]>(null);
 
@@ -28,12 +42,25 @@ export class CompaniesComponent implements OnInit, OnDestroy {
     //     this.searchResults = companies;
     //     // console.log(this.searchResults);
     //   });
+
     this.searchResultsSub = this.companyService.currentResultSet.subscribe(
       (resultArr) => {
         this.searchResults = resultArr;
       }
     );
     // this.companyService.getFirstTenCompanies();
+
+    this.searchBarInputSub = this.searchBar.valueChanges
+      .pipe(debounceTime(750), distinctUntilChanged())
+      .subscribe((searchTerm) => {
+        console.log(searchTerm);
+        if (searchTerm.length >= 3) {
+          this.companyService.searchCompaniesByTerm(searchTerm);
+        } else if (!searchTerm || searchTerm.length === 0) {
+          this.currentPage = 1;
+          this.companyService.getFirstTenCompanies();
+        }
+      });
   }
 
   ngOnDestroy(): void {

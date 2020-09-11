@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, BehaviorSubject } from 'rxjs';
 import { Company } from '../model/company';
+import { switchMap } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root',
@@ -59,5 +60,15 @@ export class CompanyService {
     return this.http.get<Company>(
       this.COMPANIES_URL + 'companies/' + companyId
     );
+  }
+
+  searchCompaniesByTerm(searchString): void {
+    this.http
+      .get<Company[]>(
+        this.COMPANIES_URL + 'companies' + '?search=' + searchString
+      )
+      .subscribe((resultArr) => {
+        this.currentResultSet.next(resultArr);
+      });
   }
 }

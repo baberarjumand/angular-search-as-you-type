@@ -3,7 +3,12 @@
     <h2 class="search-heading">Search for a Company</h2>
   </div>
   <div class="col-10 offset-1 col-sm-6 offset-sm-3 my-auto">
-    <input type="text" class="w-100 search-bar" placeholder="Search..." />
+    <input
+      type="text"
+      class="w-100 search-bar"
+      placeholder="Search..."
+      [formControl]="searchBar"
+    />
   </div>
 </div>
 
