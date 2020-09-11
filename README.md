@@ -1,5 +1,21 @@
 # AngularHttpsSearchDemo
 
+This mini-project demoes a basic implementation of the search-as-you-type feature. Mock APIs are used to simulate the real-world process of fetching and loading data from an external source.<br>
+
+A live demo of this project can be viewed here:<br>
+https://angular-search-as-you-type.stackblitz.io/companies
+
+You can experiment with the source code, right in your browser, here:<br>
+https://stackblitz.com/edit/angular-search-as-you-type
+
+The following tutorials were used in developing the different components of this project:<br>
+https://medium.com/@nacimidjakirene/angular-search-autosuggest-with-observables-6f42987f80e6<br>
+https://www.mikedane.com/web-development/css/styling-search-bar/<br>
+https://philipwalton.github.io/solved-by-flexbox/demos/vertical-centering/<br>
+https://www.npmjs.com/package/ngx-spinner<br>
+
+P.S. The images do not load in the StackBlitz demo. You should be able to load the images by installing and running this project locally.
+
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 10.1.0.
 
 ## Development server
