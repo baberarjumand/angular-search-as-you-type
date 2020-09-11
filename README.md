@@ -1,4 +1,4 @@
-# AngularHttpsSearchDemo
+# Angular 'Search As You Type' Demo
 
 This mini-project demoes a basic implementation of the search-as-you-type feature. Mock APIs are used to simulate the real-world process of fetching and loading data from an external source.<br>
 
