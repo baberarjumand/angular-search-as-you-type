@@ -30,6 +30,7 @@ export class CompaniesComponent implements OnInit, OnDestroy {
   allResultsFetched = false;
   searchBar: FormControl = new FormControl();
   searchBarInputSub: Subscription;
+  // searchTerm: string;
 
   // searchResultSet = new BehaviorSubject<Company[]>(null);
 
@@ -69,6 +70,10 @@ export class CompaniesComponent implements OnInit, OnDestroy {
     if (this.searchResultsSub) {
       this.searchResultsSub.unsubscribe();
     }
+
+    if (this.searchBarInputSub) {
+      this.searchBarInputSub.unsubscribe();
+    }
   }
 
   loadTenMoreResults(): void {
@@ -81,5 +86,7 @@ export class CompaniesComponent implements OnInit, OnDestroy {
     }
   }
 
-  onSearchbarClick(): void {}
+  clearSearchBarText(): void {
+    this.searchBar.patchValue('');
+  }
 }

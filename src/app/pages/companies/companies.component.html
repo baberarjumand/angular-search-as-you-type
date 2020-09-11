@@ -1,20 +1,40 @@
-<div class="row search-header">
-  <div class="col-10 offset-1 text-center my-auto">
-    <h2 class="search-heading">Search for a Company</h2>
+<div
+  class="row search-header"
+  [ngClass]="{ 'shrink-header': this.searchBar.value }"
+>
+  <div class="col-12 text-center heading-wrapper">
+    <h2 class="search-heading m-0 p-0">Search for a Company</h2>
   </div>
   <div class="col-10 offset-1 col-sm-6 offset-sm-3 my-auto">
-    <input
-      type="text"
-      class="w-100 search-bar"
-      placeholder="Search..."
-      [formControl]="searchBar"
-    />
+    <div class="searchbar-wrapper my-3">
+      <img
+        class="search-icon"
+        src="../../../assets/icons/search-solid.svg"
+        alt=""
+      />
+      <input
+        type="text"
+        class="w-100 search-bar"
+        placeholder="Search..."
+        [formControl]="searchBar"
+      />
+      <img
+        class="clear-icon"
+        src="../../../assets/icons/times-circle-solid.svg"
+        alt=""
+        (click)="this.clearSearchBarText()"
+        *ngIf="this.searchBar.value"
+      />
+    </div>
   </div>
 </div>
 
 <div class="row">
   <div class="col-12 col-sm-8 offset-sm-2">
-    <div class="row">
+    <div
+      class="row"
+      *ngIf="this.searchResults && this.searchResults.length > 0"
+    >
       <div
         class="col-10 offset-1 col-sm-4 offset-sm-0"
         *ngFor="let company of this.searchResults"
@@ -41,6 +61,11 @@
           *ngIf="!this.allResultsFetched"
           >View More</a
         >
+      </div>
+    </div>
+    <div class="row" *ngIf="searchResults.length <= 0">
+      <div class="col text-center my-5">
+        <p>No results found. Please try another search term.</p>
       </div>
     </div>
   </div>
