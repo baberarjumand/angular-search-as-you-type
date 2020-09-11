@@ -15,6 +15,7 @@ import {
 import { Company } from 'src/app/shared/model/company';
 import { Subscription, BehaviorSubject } from 'rxjs';
 import { debounceTime, distinctUntilChanged, switchMap } from 'rxjs/operators';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-companies',
@@ -33,7 +34,10 @@ export class CompaniesComponent implements OnInit, OnDestroy {
 
   // searchResultSet = new BehaviorSubject<Company[]>(null);
 
-  constructor(private companyService: CompanyService) {}
+  constructor(
+    private companyService: CompanyService,
+    private spinner: NgxSpinnerService
+  ) {}
 
   ngOnInit(): void {
     // this.searchResultsSub = this.companyService
@@ -46,12 +50,16 @@ export class CompaniesComponent implements OnInit, OnDestroy {
     this.searchResultsSub = this.companyService.currentResultSet.subscribe(
       (resultArr) => {
         this.searchResults = resultArr;
+
+        // setTimeout(() => {
+        //   this.spinner.hide();
+        // }, 3000);
       }
     );
     // this.companyService.getFirstTenCompanies();
 
     this.searchBarInputSub = this.searchBar.valueChanges
-      .pipe(debounceTime(750), distinctUntilChanged())
+      .pipe(debounceTime(500), distinctUntilChanged())
       .subscribe((searchTerm) => {
         // console.log(searchTerm);
         if (searchTerm.length >= 3) {

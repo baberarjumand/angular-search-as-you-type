@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable, BehaviorSubject } from 'rxjs';
 import { Company } from '../model/company';
 import { switchMap } from 'rxjs/operators';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Injectable({
   providedIn: 'root',
@@ -11,7 +12,7 @@ export class CompanyService {
   COMPANIES_URL = 'https://5f59cabb8040620016ab960d.mockapi.io/';
   currentResultSet = new BehaviorSubject<Company[]>(null);
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private spinner: NgxSpinnerService) {
     this.getFirstTenCompanies();
   }
 
@@ -35,16 +36,19 @@ export class CompanyService {
     // return this.http.get<Company[]>(
     //   this.COMPANIES_URL + 'companies' + '?page=' + randomInt + '&limit=10'
     // );
+    this.spinner.show();
     this.http
       .get<Company[]>(
         this.COMPANIES_URL + 'companies' + '?page=' + 1 + '&limit=10'
       )
       .subscribe((resultArr) => {
         this.currentResultSet.next(resultArr);
+        this.spinner.hide();
       });
   }
 
   getCompaniesByPageNumber(pageNumber): void {
+    this.spinner.show();
     this.http
       .get<Company[]>(
         this.COMPANIES_URL + 'companies' + '?page=' + pageNumber + '&limit=10'
@@ -53,6 +57,7 @@ export class CompanyService {
         this.currentResultSet.next(
           this.currentResultSet.value.concat(resultArr)
         );
+        this.spinner.hide();
       });
   }
 
@@ -63,12 +68,14 @@ export class CompanyService {
   }
 
   searchCompaniesByTerm(searchString): void {
+    this.spinner.show();
     this.http
       .get<Company[]>(
         this.COMPANIES_URL + 'companies' + '?search=' + searchString
       )
       .subscribe((resultArr) => {
         this.currentResultSet.next(resultArr);
+        this.spinner.hide();
       });
   }
 }
