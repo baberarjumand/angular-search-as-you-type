@@ -31,6 +31,15 @@
 
 <div class="row">
   <div class="col-12 col-sm-8 offset-sm-2">
+    <!-- <div class="row my-5" *ngIf="this.isLoading">
+      <div class="col-12">
+        <div class="d-flex justify-content-center">
+          <div class="spinner-border" role="status">
+            <span class="sr-only">Loading...</span>
+          </div>
+        </div>
+      </div>
+    </div> -->
     <div
       class="row"
       *ngIf="this.searchResults && this.searchResults.length > 0"
@@ -63,7 +72,7 @@
         >
       </div>
     </div>
-    <div class="row" *ngIf="searchResults.length <= 0">
+    <div class="row" *ngIf="this.searchResults && searchResults.length <= 0">
       <div class="col text-center my-5">
         <p>No results found. Please try another search term.</p>
       </div>

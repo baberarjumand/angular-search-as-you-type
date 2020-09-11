@@ -30,7 +30,6 @@ export class CompaniesComponent implements OnInit, OnDestroy {
   allResultsFetched = false;
   searchBar: FormControl = new FormControl();
   searchBarInputSub: Subscription;
-  // searchTerm: string;
 
   // searchResultSet = new BehaviorSubject<Company[]>(null);
 
